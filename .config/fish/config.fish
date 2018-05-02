@@ -1,6 +1,5 @@
-eval (python -m virtualfish)
-set -xg PYTHONPATH /home/lechnerml/sw/powerline-shell/bin/lib/python3.6/site-packages/ $PYTHONPATH
-
+eval (python -m virtualfish projects)
+set -xg PYTHONPATH /home/lechnerml/sw/tensorflow-models
 set -xg MAKEFLAGS -j56
 
 # Intel MKL and IPP

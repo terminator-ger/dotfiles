@@ -1,6 +1,5 @@
 set nocompatible              " be iMproved, required
 set number
-set colorcolumn=81
 filetype on  " required
 filetype plugin on
 filetype indent on
@@ -9,7 +8,6 @@ filetype indent on
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -28,8 +26,6 @@ Plugin 'benekastah/neomake'
 " Remove extraneous whitespace when edit mode is exited
 Plugin 'thirtythreeforty/lessspace.vim'
 
-" LaTeX editing
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 " Status bar mods
 "Plugin 'bling/vim-airline'
@@ -50,7 +46,9 @@ Plugin 'raimondi/delimitmate'
 "solarized colors
 Plugin 'altercation/vim-colors-solarized'
 
-" nerdtree Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
+" latex
+Plugin 'lervag/vimtex'
 
 " tabular
 Plugin 'godlygeek/tabular'
@@ -77,16 +75,8 @@ Plugin 'joonty/vdebug'
 
 
 "Auto Completion
-Plugin 'shougo/deoplete.nvim'
-Plugin 'zchee/deoplete-jedi'
-Plugin 'zchee/deoplete-clang'
-
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'lyuts/vim-rtags'
-Plugin 'jimmysitu/pyclewn'
-
-" --------------------------------------------------------------------------
-"
+Plugin 'LucHermitte/lh-vim-lib'
+Plugin 'LucHermitte/VimFold4C'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -109,8 +99,9 @@ syntax enable
 set background=light
 colorscheme solarized
 
-nnoremap <SPACE> <Nop>
-let mapleader = "\<space>"
+"let mapleader = ","
+
+
 " c++ highlight settings
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
@@ -137,11 +128,14 @@ let g:NERDTreeIndicatorMapCustom = {
 set hidden
 set autochdir
 " start nerdtree on startup
-autocmd vimenter * NERDTree
+autocmd VimEnter * NERDTree
 
 "start nerdtree for no given file argument vim
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"move cursor to the main window
+autocmd VimEnter * wincmd p
 
 let g:gitgutter_enabled = 1
 let g:gitgutter_signs = 1
@@ -185,6 +179,8 @@ nnoremap <C-h> 0
 nnoremap <C-j> L
 nnoremap <C-k> H
 nnoremap <C-l> $
+" highlight current line
+set cursorline
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -215,3 +211,17 @@ let g:airline_theme='solarized'
 "visual tabbing
 vmap <Tab> >gv
 vmap <S-Tab> <gv
+
+set foldmethod=syntax
+
+
+"latex
+let g:vimtex_compiler_progname = 'nvr'
+
+
+if !exists('g:ycm_semantic_triggers')
+   let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+
+map <F11> :w<cr><leader>ll
