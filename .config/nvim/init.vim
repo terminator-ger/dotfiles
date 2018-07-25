@@ -1,8 +1,7 @@
 set nocompatible              " be iMproved, required
 set number
 filetype on  " required
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -96,7 +95,7 @@ set shell=/bin/bash
 
 
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 
 "let mapleader = ","
@@ -218,10 +217,17 @@ set foldmethod=syntax
 "latex
 let g:vimtex_compiler_progname = 'nvr'
 
-
 if !exists('g:ycm_semantic_triggers')
    let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 map <F11> :w<cr><leader>ll
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set copyindent
+
