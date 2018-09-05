@@ -69,8 +69,10 @@ Plugin 'craigemery/vim-autotag'
 
 "GDB Integration
 "Plugin 'sakhnik/nvim-gdb'
-Plugin 'joonty/vdebug'
+"Plugin 'joonty/vdebug'
 "Plugin 'Conque-GDB'
+
+Plugin 'vim-vdebug/vdebug'
 
 
 "Auto Completion
@@ -215,6 +217,7 @@ set foldmethod=syntax
 
 
 "latex
+let g:Tex_DefaultTargetFormat = 'pdf'
 let g:vimtex_compiler_progname = 'nvr'
 
 if !exists('g:ycm_semantic_triggers')
@@ -230,4 +233,5 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set copyindent
-
+" case insensitive search
+set ic
