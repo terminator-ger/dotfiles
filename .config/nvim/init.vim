@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 "
 "
 " The following are examples of different formats supported.
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'myint/syntastic-extras'
@@ -52,13 +52,19 @@ Plugin 'lervag/vimtex'
 " tabular
 Plugin 'godlygeek/tabular'
 
+"=============================
+" CPP
+"=============================
 " c++ highlight support
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " c++ hpp switching
 Plugin 'vim-scripts/a.vim'
-
+"call cmake from vim :cmake
+Plugin 'vhdirk/vim-cmake'
+"fancy sidebar
 Plugin 'majutsushi/tagbar'
-Plugin 'Shougo/neocomplete.vim'
+
+"Plugin 'Shougo/neocomplete.vim'
 
 "Iconset
 Plugin 'ryanoasis/vim-devicons'
@@ -68,7 +74,7 @@ Plugin 'craigemery/vim-autotag'
 "Plugin 'szw/vim-tags'
 
 "GDB Integration
-"Plugin 'sakhnik/nvim-gdb'
+Plugin 'sakhnik/nvim-gdb'
 "Plugin 'joonty/vdebug'
 "Plugin 'Conque-GDB'
 
@@ -124,6 +130,9 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "n 'rip-rip/clang_complete'Unknown"   : "?"
     \ }
 
+" cmake export symbols -> ycm
+let g:cmake_export_compile_commands = 1
+let g:cmake_ycm_symlinks = 1
 
 "allow switching buffers with unsaved files open
 set hidden
@@ -158,10 +167,14 @@ let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
 "move betweens splits
-"nmap <C-A>h˙<C-w><Left>
-"nmap <C-A>l <C-w><Right>
-"nmap <C-A>l <C-w><Up>
-"nmap <C-A>j <C-w><Down>
+"execute "set <M-j>=\ej"
+"execute "set <M-k>=\ek"
+"execute "set <M-h>=\eh"
+"execute "set <M-l>=\el"
+inoremap <M-h> <C-w><Left>
+inoremap <M-l> <C-w><Right>
+inoremap <M-k> <C-w><Up>
+inoremap <M-j <C-w><Down>
 
 "move between tabs
 map <A-l> gt
@@ -215,6 +228,8 @@ vmap <S-Tab> <gv
 
 set foldmethod=syntax
 
+"open Tagbar
+nmap <F8> :TagbarToggle<CR>
 
 "latex
 let g:Tex_DefaultTargetFormat = 'pdf'
@@ -225,7 +240,12 @@ if !exists('g:ycm_semantic_triggers')
 endif
 let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
+
+"tex compile
 map <F11> :w<cr><leader>ll
+
+"YCM autofix for common cpp errors
+map <F3> :YcmCompleter FixIt<CR>
 
 set tabstop=4
 set softtabstop=4
